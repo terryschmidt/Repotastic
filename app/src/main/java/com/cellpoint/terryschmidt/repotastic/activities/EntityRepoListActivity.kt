@@ -1,6 +1,7 @@
 package com.cellpoint.terryschmidt.repotastic.activities
 
 import adapters.RepoAdapter
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.NavUtils
 import android.support.v4.content.ContextCompat
@@ -17,6 +18,8 @@ import network.RetrofitInstance
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+
+
 
 class EntityRepoListActivity : AppCompatActivity() {
 
@@ -94,7 +97,9 @@ class EntityRepoListActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> {
-                NavUtils.navigateUpFromSameTask(this)
+                val intent = NavUtils.getParentActivityIntent(this)
+                intent!!.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                NavUtils.navigateUpTo(this, intent)
                 return true
             }
         }
