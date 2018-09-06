@@ -31,7 +31,7 @@ class EntityRepoListActivity : AppCompatActivity() {
         Log.d(TAG, "Repo URL: " + intent.extras.get("repos").toString())
         repoOwner = intent.extras.get("name").toString()
         Log.d(TAG, "Repo Owner: $repoOwner")
-        supportActionBar?.title = intent.extras.get("name").toString() + " (" + intent.extras.get("language") + ")"
+        supportActionBar?.title = intent.extras.get("name").toString() + " (" + intent.extras.get("type") + ")"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         repoRecycler = findViewById(R.id.repoRecycler)
         repoRecycler.layoutManager = LinearLayoutManager(this)

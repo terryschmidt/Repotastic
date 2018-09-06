@@ -41,7 +41,7 @@ class EntityAdapter(var entities: MutableList<Entity>?) : RecyclerView.Adapter<E
             Log.d(TAG, "Item pressed: $layoutPosition")
             val repoListActivityIntent = Intent(view?.context, EntityRepoListActivity::class.java)
             repoListActivityIntent.putExtra("name", login.text)
-            repoListActivityIntent.putExtra("language", type.text)
+            repoListActivityIntent.putExtra("type", type.text)
             repoListActivityIntent.putExtra("repos", entities?.get(layoutPosition)?.reposUrl)
             view?.context?.startActivity(repoListActivityIntent)
         }
