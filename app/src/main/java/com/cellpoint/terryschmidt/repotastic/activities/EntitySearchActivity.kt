@@ -94,7 +94,6 @@ class EntitySearchActivity : AppCompatActivity() {
 
                 if (response == null) { Log.e(TAG, "null response") }
                 if (response!!.body() == null) { Log.e(TAG, "null body") }
-                if (response!!.body()!!.entityList == null) { Log.e(TAG, "null entityList") }
 
                 val newEntityList: MutableList<Entity>? = response.body()?.entityList?.toMutableList()
                 if (newEntityList != null) {
