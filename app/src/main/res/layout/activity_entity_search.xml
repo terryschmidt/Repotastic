@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto"
+                                             xmlns:tools="http://schemas.android.com/tools"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent"
+                                             android:focusable="true"
+                                             android:focusableInTouchMode="true"
+                                             tools:context=".activities.EntitySearchActivity">
+
+    <EditText
+        android:id="@+id/search_box"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/rounded_border_search_box"
+        android:drawableLeft="@drawable/ic_search_24dp"
+        android:drawablePadding="5dp"
+        android:drawableStart="@drawable/ic_search_24dp"
+        android:ems="10"
+        android:hint="@string/github_users_search_placeholder"
+        android:inputType="text"
+        android:padding="8dp"
+        android:textColor="@color/colorSecondaryText"
+        android:textColorHint="@color/colorSecondaryText"
+        android:textColorLink="@color/colorSecondaryText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/entityRecycler"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_box" />
+
+</android.support.constraint.ConstraintLayout>

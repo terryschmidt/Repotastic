@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Repotastic</string>
+    <string name="users_title">Github</string>
+    <string name="github_users_search_placeholder">Search Github Users/Orgs</string>
+</resources>
