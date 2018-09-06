@@ -16,5 +16,6 @@ interface GetDataService {
 
     @GET("users/{name}/repos")
     fun getReposByName(@Path("name") name: String,
-                       @Query("page") page: Int): Call<List<Repo>>
+                       @Query("page") page: Int,
+                       @Query("access_token") accessToken: String): Call<List<Repo>>
 }

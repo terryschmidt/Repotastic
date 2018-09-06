@@ -63,7 +63,7 @@ class EntityRepoListActivity : AppCompatActivity() {
             pageNumber = 1
         }
         val service = RetrofitInstance.getRetrofitInstance()?.create(GetDataService::class.java)
-        val call = service?.getReposByName(repoOwner, pageNumber)
+        val call = service?.getReposByName(repoOwner, pageNumber, getString(R.string.api_key))
         call?.enqueue(object : Callback<List<Repo>> {
             override fun onFailure(call: Call<List<Repo>>?, t: Throwable?) {
                 Log.e(TAG, "onFailure: " + t?.message)
