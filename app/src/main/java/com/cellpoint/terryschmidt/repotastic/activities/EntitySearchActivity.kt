@@ -80,7 +80,7 @@ class EntitySearchActivity : AppCompatActivity() {
             return
         }
         //var qualifier = "+in%3Alogin"
-        val call = service?.getEntityListWrapper(query + "in:login", getString(R.string.github_graphql__token), pageNumber)
+        val call = service?.getEntityListWrapper(query + "in:login", getString(R.string.api_key), pageNumber)
         call?.enqueue(object : Callback<EntityListWrapper> {
             override fun onFailure(call: Call<EntityListWrapper>?, t: Throwable?) {
                 Log.e(TAG, "onFailure: " + t?.message)
