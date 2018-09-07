@@ -22,5 +22,10 @@
                   android:parentActivityName=".activities.EntitySearchActivity">
 
         </activity>
+
+        <activity android:name=".activities.RepoDetailActivity"
+                  android:parentActivityName=".activities.EntityRepoListActivity">
+
+        </activity>
     </application>
 </manifest>

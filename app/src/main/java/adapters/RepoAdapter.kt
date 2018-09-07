@@ -1,14 +1,17 @@
 package adapters
 
 import adapters.RepoAdapter.RepoViewHolder
+import android.content.Intent
 import android.os.Handler
 import android.os.Looper
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.cellpoint.terryschmidt.repotastic.R
+import com.cellpoint.terryschmidt.repotastic.activities.RepoDetailActivity
 import model.Repo
 
 class RepoAdapter(var repos: MutableList<Repo>?) : RecyclerView.Adapter<RepoViewHolder>() {
@@ -36,7 +39,17 @@ class RepoAdapter(var repos: MutableList<Repo>?) : RecyclerView.Adapter<RepoView
         }
 
         override fun onClick(view: View?) {
-
+            Log.d(TAG, "Item pressed: $layoutPosition")
+            val repoDetailIntent = Intent(view?.context, RepoDetailActivity::class.java)
+            val repo = repos?.get(layoutPosition)
+            repoDetailIntent.putExtra("name", name.text)
+            repoDetailIntent.putExtra("language", language.text)
+            repoDetailIntent.putExtra("created_at", repo?.created_at)
+            repoDetailIntent.putExtra("html_url", repo?.html_url)
+            repoDetailIntent.putExtra("fork", repo?.isFork)
+            repoDetailIntent.putExtra("stargazers_count", repo?.stargazers_count)
+            repoDetailIntent.putExtra("open_issues", repo?.open_issues)
+            view?.context?.startActivity(repoDetailIntent)
         }
     }
 

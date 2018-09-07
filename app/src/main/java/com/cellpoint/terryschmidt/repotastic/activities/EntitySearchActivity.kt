@@ -12,6 +12,7 @@ import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.EditText
+import android.widget.Switch
 import com.cellpoint.terryschmidt.repotastic.R
 import model.Entity
 import model.EntityListWrapper
@@ -30,16 +31,24 @@ class EntitySearchActivity : AppCompatActivity() {
     private val delay: Long = 1000
     private var pageNumber: Int = 1
     private lateinit var entityAdapter: EntityAdapter
+    private lateinit var toggle: Switch
+    private var currentToggleState: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_entity_search)
+        toggle = findViewById(R.id.toggle)
         searchEditText = findViewById(R.id.search_box)
         entityRecycler = findViewById(R.id.entityRecycler)
         setSearchBarListener()
         entityRecycler.layoutManager = LinearLayoutManager(this)
         entityRecycler.hasFixedSize()
         entityAdapter = EntityAdapter(mutableListOf())
+        toggle.setOnCheckedChangeListener { buttonView, isChecked ->
+            currentToggleState = isChecked
+            entityAdapter.removeAll()
+            loadEntities(false)
+        }
         entityRecycler.adapter = entityAdapter
         val itemDecorator = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
         itemDecorator.setDrawable(ContextCompat.getDrawable(this, R.drawable.recycler_divider)!!)
@@ -79,8 +88,12 @@ class EntitySearchActivity : AppCompatActivity() {
             entityAdapter.removeAll()
             return
         }
-        //var qualifier = "+in%3Alogin"
-        val call = service?.getEntityListWrapper(query + "in:login", getString(R.string.api_key), pageNumber)
+        val type = if (currentToggleState) {
+            "user"
+        } else {
+            "org"
+        }
+        val call = service?.getEntityListWrapper(query + "type:$type", getString(R.string.api_key), pageNumber)
         call?.enqueue(object : Callback<EntityListWrapper> {
             override fun onFailure(call: Call<EntityListWrapper>?, t: Throwable?) {
                 Log.e(TAG, "onFailure: " + t?.message)

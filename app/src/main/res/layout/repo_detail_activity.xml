@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                             android:layout_width="match_parent"
+                                             android:layout_height="match_parent"
+                                             xmlns:app="http://schemas.android.com/apk/res-auto">
+    <TextView
+        android:id="@+id/repoDetailName"
+        android:text="Name: "
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:paddingTop="8dp"
+        android:textSize="16sp"
+        android:textColor="@color/colorBlack"/>
+    <TextView
+        android:id="@+id/repoDetailLanguage"
+        android:text="Language: "
+        app:layout_constraintTop_toBottomOf="@id/repoDetailName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:paddingTop="8dp"
+        android:textSize="16sp"
+        android:textColor="@color/colorBlack"/>
+    <TextView
+        android:id="@+id/repoDetailCreatedAt"
+        android:text="Created at: "
+        app:layout_constraintTop_toBottomOf="@id/repoDetailLanguage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:paddingTop="8dp"
+        android:textSize="16sp"
+        android:textColor="@color/colorBlack"/>
+    <TextView
+        android:id="@+id/repoDetailHtmlUrl"
+        android:text="HTML URL: "
+        app:layout_constraintTop_toBottomOf="@id/repoDetailCreatedAt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:paddingTop="8dp"
+        android:textSize="16sp"
+        android:textColor="@color/colorBlack"/>
+    <TextView
+        android:id="@+id/repoDetailFork"
+        android:text="Is a Fork: "
+        app:layout_constraintTop_toBottomOf="@id/repoDetailHtmlUrl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:paddingTop="8dp"
+        android:textSize="16sp"
+        android:textColor="@color/colorBlack"/>
+    <TextView
+        android:id="@+id/repoDetailStargazersCount"
+        android:text="Stars: "
+        app:layout_constraintTop_toBottomOf="@id/repoDetailFork"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:paddingTop="8dp"
+        android:textSize="16sp"
+        android:textColor="@color/colorBlack"/>
+    <TextView
+        android:id="@+id/repoDetailOpenIssues"
+        android:text="Open Issues Count: "
+        app:layout_constraintTop_toBottomOf="@id/repoDetailStargazersCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="16dp"
+        android:paddingTop="8dp"
+        android:textSize="16sp"
+        android:textColor="@color/colorBlack"/>
+
+</android.support.constraint.ConstraintLayout>
