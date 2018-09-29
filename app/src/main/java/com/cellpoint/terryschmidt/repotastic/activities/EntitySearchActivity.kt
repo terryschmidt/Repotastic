@@ -135,10 +135,6 @@ class EntitySearchActivity : AppCompatActivity() {
         return true
     }
 
-    override fun onBackPressed() {
-        finish()
-    }
-
     companion object {
         @JvmStatic
         val TAG = "EntitySearchActivity"
