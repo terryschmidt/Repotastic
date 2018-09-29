@@ -135,7 +135,9 @@ class EntitySearchActivity : AppCompatActivity() {
         return true
     }
 
-    override fun onBackPressed() {}
+    override fun onBackPressed() {
+        finish()
+    }
 
     companion object {
         @JvmStatic
