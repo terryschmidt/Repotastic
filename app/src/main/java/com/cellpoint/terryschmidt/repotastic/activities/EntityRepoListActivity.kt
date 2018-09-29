@@ -48,7 +48,7 @@ class EntityRepoListActivity : AppCompatActivity() {
 
     private fun setRecyclerViewScrollListener() {
         repoRecycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 if (recyclerView?.canScrollVertically(1) == false) {
                     loadRepos(true)

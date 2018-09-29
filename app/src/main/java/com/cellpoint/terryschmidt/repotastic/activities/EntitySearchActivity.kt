@@ -122,7 +122,7 @@ class EntitySearchActivity : AppCompatActivity() {
 
     private fun setRecyclerViewScrollListener() {
         entityRecycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 if (recyclerView?.canScrollVertically(1) == false) {
                     loadEntities(true)
