@@ -131,10 +131,6 @@ class EntitySearchActivity : AppCompatActivity() {
         })
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        return true
-    }
-
     companion object {
         @JvmStatic
         val TAG = "EntitySearchActivity"
