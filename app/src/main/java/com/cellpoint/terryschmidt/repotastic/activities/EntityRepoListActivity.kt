@@ -3,12 +3,12 @@ package com.cellpoint.terryschmidt.repotastic.activities
 import adapters.RepoAdapter
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.NavUtils
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.core.app.NavUtils
+import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.MenuItem
 import com.cellpoint.terryschmidt.repotastic.R
@@ -21,7 +21,7 @@ import retrofit2.Response
 
 class EntityRepoListActivity : AppCompatActivity() {
 
-    private lateinit var repoRecycler: RecyclerView
+    private lateinit var repoRecycler: androidx.recyclerview.widget.RecyclerView
     private lateinit var repoAdapter: RepoAdapter
     private lateinit var repoOwner: String
     private var pageNumber: Int = 0
@@ -35,11 +35,11 @@ class EntityRepoListActivity : AppCompatActivity() {
         supportActionBar?.title = intent.extras.get("name").toString() + " (" + intent.extras.get("type") + ")"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         repoRecycler = findViewById(R.id.repoRecycler)
-        repoRecycler.layoutManager = LinearLayoutManager(this)
+        repoRecycler.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
         repoRecycler.hasFixedSize()
         repoAdapter = RepoAdapter(mutableListOf())
         repoRecycler.adapter = repoAdapter
-        val itemDecorator = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+        val itemDecorator = androidx.recyclerview.widget.DividerItemDecoration(this, androidx.recyclerview.widget.DividerItemDecoration.VERTICAL)
         itemDecorator.setDrawable(ContextCompat.getDrawable(this, R.drawable.recycler_divider)!!)
         repoRecycler.addItemDecoration(itemDecorator)
         setRecyclerViewScrollListener()
@@ -47,8 +47,8 @@ class EntityRepoListActivity : AppCompatActivity() {
     }
 
     private fun setRecyclerViewScrollListener() {
-        repoRecycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+        repoRecycler.addOnScrollListener(object : androidx.recyclerview.widget.RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: androidx.recyclerview.widget.RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 if (recyclerView?.canScrollVertically(1) == false) {
                     loadRepos(true)

@@ -3,7 +3,7 @@ package adapters
 import android.content.Intent
 import android.os.Handler
 import android.os.Looper
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +13,7 @@ import com.cellpoint.terryschmidt.repotastic.R
 import com.cellpoint.terryschmidt.repotastic.activities.EntityRepoListActivity
 import model.Entity
 
-class EntityAdapter(var entities: MutableList<Entity>?) : RecyclerView.Adapter<EntityAdapter.EntityViewHolder>() {
+class EntityAdapter(var entities: MutableList<Entity>?) : androidx.recyclerview.widget.RecyclerView.Adapter<EntityAdapter.EntityViewHolder>() {
     override fun onBindViewHolder(holder: EntityViewHolder, position: Int) {
         val entity = entities?.get(position)
         holder.login.text = entity?.login
@@ -29,7 +29,7 @@ class EntityAdapter(var entities: MutableList<Entity>?) : RecyclerView.Adapter<E
         return entities?.size ?: 0
     }
 
-    inner class EntityViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
+    inner class EntityViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view), View.OnClickListener {
         var login: TextView = view.findViewById(R.id.login)
         var type: TextView = view.findViewById(R.id.type)
 

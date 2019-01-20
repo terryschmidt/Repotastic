@@ -4,7 +4,7 @@ import adapters.RepoAdapter.RepoViewHolder
 import android.content.Intent
 import android.os.Handler
 import android.os.Looper
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +14,7 @@ import com.cellpoint.terryschmidt.repotastic.R
 import com.cellpoint.terryschmidt.repotastic.activities.RepoDetailActivity
 import model.Repo
 
-class RepoAdapter(var repos: MutableList<Repo>?) : RecyclerView.Adapter<RepoViewHolder>() {
+class RepoAdapter(var repos: MutableList<Repo>?) : androidx.recyclerview.widget.RecyclerView.Adapter<RepoViewHolder>() {
     override fun onBindViewHolder(holder: RepoViewHolder, position: Int) {
         val repo = repos?.get(position)
         holder.name.text = repo?.name
@@ -30,7 +30,7 @@ class RepoAdapter(var repos: MutableList<Repo>?) : RecyclerView.Adapter<RepoView
         return repos?.size ?: 0
     }
 
-    inner class RepoViewHolder(view: View) : RecyclerView.ViewHolder(view), View.OnClickListener {
+    inner class RepoViewHolder(view: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(view), View.OnClickListener {
         var name: TextView = view.findViewById(R.id.repoName)
         var language: TextView = view.findViewById(R.id.language)
 

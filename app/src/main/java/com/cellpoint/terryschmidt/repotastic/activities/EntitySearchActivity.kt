@@ -2,11 +2,11 @@ package com.cellpoint.terryschmidt.repotastic.activities
 
 import adapters.EntityAdapter
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.core.content.ContextCompat
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -26,7 +26,7 @@ import java.util.*
 class EntitySearchActivity : AppCompatActivity() {
 
     private lateinit var searchEditText: EditText
-    private lateinit var entityRecycler: RecyclerView
+    private lateinit var entityRecycler: androidx.recyclerview.widget.RecyclerView
     private var timer = Timer()
     private val delay: Long = 1000
     private var pageNumber: Int = 1
@@ -36,12 +36,13 @@ class EntitySearchActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d(TAG, "onCreate!")
         setContentView(R.layout.activity_entity_search)
         toggle = findViewById(R.id.toggle)
         searchEditText = findViewById(R.id.search_box)
         entityRecycler = findViewById(R.id.entityRecycler)
         setSearchBarListener()
-        entityRecycler.layoutManager = LinearLayoutManager(this)
+        entityRecycler.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
         entityRecycler.hasFixedSize()
         entityAdapter = EntityAdapter(mutableListOf())
         toggle.setOnCheckedChangeListener { buttonView, isChecked ->
@@ -50,7 +51,7 @@ class EntitySearchActivity : AppCompatActivity() {
             loadEntities(false)
         }
         entityRecycler.adapter = entityAdapter
-        val itemDecorator = DividerItemDecoration(this, DividerItemDecoration.VERTICAL)
+        val itemDecorator = androidx.recyclerview.widget.DividerItemDecoration(this, androidx.recyclerview.widget.DividerItemDecoration.VERTICAL)
         itemDecorator.setDrawable(ContextCompat.getDrawable(this, R.drawable.recycler_divider)!!)
         entityRecycler.addItemDecoration(itemDecorator)
         setRecyclerViewScrollListener()
@@ -68,7 +69,6 @@ class EntitySearchActivity : AppCompatActivity() {
                 timer.schedule(
                         object : TimerTask() {
                             override fun run() {
-                                Log.e("Query users", searchEditText.text.toString())
                                 loadEntities(false)
                             }
                         }, delay)
@@ -121,14 +121,44 @@ class EntitySearchActivity : AppCompatActivity() {
     }
 
     private fun setRecyclerViewScrollListener() {
-        entityRecycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+        entityRecycler.addOnScrollListener(object : androidx.recyclerview.widget.RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: androidx.recyclerview.widget.RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 if (recyclerView?.canScrollVertically(1) == false) {
                     loadEntities(true)
                 }
             }
         })
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(TAG, "onStop!")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "onResume!")
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.d(TAG, "onRestart!")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG, "onPause!")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d(TAG, "onStart!")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(TAG, "onDestroy!")
     }
 
     companion object {
