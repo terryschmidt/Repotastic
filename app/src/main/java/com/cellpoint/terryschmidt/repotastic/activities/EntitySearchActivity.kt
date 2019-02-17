@@ -2,17 +2,14 @@ package com.cellpoint.terryschmidt.repotastic.activities
 
 import adapters.EntityAdapter
 import android.os.Bundle
-import androidx.core.content.ContextCompat
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.EditText
 import android.widget.Switch
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.cellpoint.terryschmidt.repotastic.R
 import model.Entity
 import model.EntityListWrapper
@@ -48,6 +45,7 @@ class EntitySearchActivity : AppCompatActivity() {
         toggle.setOnCheckedChangeListener { buttonView, isChecked ->
             currentToggleState = isChecked
             entityAdapter.removeAll()
+            Log.d(TAG, "New loadEntities because onCheckedChangeListener")
             loadEntities(false)
         }
         entityRecycler.adapter = entityAdapter
@@ -69,6 +67,7 @@ class EntitySearchActivity : AppCompatActivity() {
                 timer.schedule(
                         object : TimerTask() {
                             override fun run() {
+                                Log.d(TAG, "New loadEntities because onTextChanged on thread: " + Thread.currentThread().name)
                                 loadEntities(false)
                             }
                         }, delay)
@@ -124,7 +123,8 @@ class EntitySearchActivity : AppCompatActivity() {
         entityRecycler.addOnScrollListener(object : androidx.recyclerview.widget.RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: androidx.recyclerview.widget.RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                if (recyclerView?.canScrollVertically(1) == false) {
+                if (recyclerView.canScrollVertically(1) == false) {
+                    Log.d(TAG, "New loadEntities because scroll activity")
                     loadEntities(true)
                 }
             }

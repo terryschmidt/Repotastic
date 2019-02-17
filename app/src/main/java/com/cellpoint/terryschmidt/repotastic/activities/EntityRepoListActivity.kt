@@ -3,14 +3,11 @@ package com.cellpoint.terryschmidt.repotastic.activities
 import adapters.RepoAdapter
 import android.content.Intent
 import android.os.Bundle
-import androidx.core.app.NavUtils
-import androidx.core.content.ContextCompat
-import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.util.Log
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NavUtils
+import androidx.core.content.ContextCompat
 import com.cellpoint.terryschmidt.repotastic.R
 import model.Repo
 import network.GetDataService
@@ -50,7 +47,7 @@ class EntityRepoListActivity : AppCompatActivity() {
         repoRecycler.addOnScrollListener(object : androidx.recyclerview.widget.RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: androidx.recyclerview.widget.RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                if (recyclerView?.canScrollVertically(1) == false) {
+                if (recyclerView.canScrollVertically(1) == false) {
                     loadRepos(true)
                 }
             }
