@@ -30,13 +30,13 @@ class RepoDetailActivity : AppCompatActivity() {
         openIssuesTextView = findViewById(R.id.repoDetailOpenIssues)
         supportActionBar?.title = intent.extras.get("name").toString()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        nameTextView.text = nameTextView.text.toString() + intent.extras.get("name").toString()
-        languageTextView.text = languageTextView.text.toString() + intent.extras.get("language").toString()
-        createdAtTextView.text = createdAtTextView.text.toString() + intent.extras.get("created_at").toString()
-        htmlUrlTextView.text = htmlUrlTextView.text.toString() + intent.extras.get("html_url").toString()
-        forkTextView.text = forkTextView.text.toString() + intent.extras.get("fork").toString()
-        stargazerCountTextView.text = stargazerCountTextView.text.toString() + intent.extras.get("stargazers_count").toString()
-        openIssuesTextView.text = openIssuesTextView.text.toString() + intent.extras.get("open_issues").toString()
+        nameTextView.text = nameTextView.text.toString() + intent.extras?.get("name").toString()
+        languageTextView.text = languageTextView.text.toString() + intent.extras?.get("language").toString()
+        createdAtTextView.text = createdAtTextView.text.toString() + intent.extras?.get("created_at").toString()
+        htmlUrlTextView.text = htmlUrlTextView.text.toString() + intent.extras?.get("html_url").toString()
+        forkTextView.text = forkTextView.text.toString() + intent.extras?.get("fork").toString()
+        stargazerCountTextView.text = stargazerCountTextView.text.toString() + intent.extras?.get("stargazers_count").toString()
+        openIssuesTextView.text = openIssuesTextView.text.toString() + intent.extras?.get("open_issues").toString()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
