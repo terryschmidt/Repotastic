@@ -28,7 +28,7 @@ class RepoDetailActivity : AppCompatActivity() {
         forkTextView = findViewById(R.id.repoDetailFork)
         stargazerCountTextView = findViewById(R.id.repoDetailStargazersCount)
         openIssuesTextView = findViewById(R.id.repoDetailOpenIssues)
-        supportActionBar?.title = intent.extras.get("name").toString()
+        supportActionBar?.title = intent.extras?.get("name").toString()
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         nameTextView.text = nameTextView.text.toString() + intent.extras?.get("name").toString()
         languageTextView.text = languageTextView.text.toString() + intent.extras?.get("language").toString()

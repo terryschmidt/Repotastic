@@ -42,7 +42,7 @@ class EntitySearchActivity : AppCompatActivity() {
         entityRecycler.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
         entityRecycler.hasFixedSize()
         entityAdapter = EntityAdapter(mutableListOf())
-        toggle.setOnCheckedChangeListener { buttonView, isChecked ->
+        toggle.setOnCheckedChangeListener { _, isChecked ->
             currentToggleState = isChecked
             entityAdapter.removeAll()
             Log.d(TAG, "New loadEntities because onCheckedChangeListener")
@@ -83,7 +83,7 @@ class EntitySearchActivity : AppCompatActivity() {
         }
         val service = RetrofitInstance.getRetrofitInstance()?.create(GetDataService::class.java)
         val query = searchEditText.text.toString()
-        if (query.equals("")) {
+        if (query == "") {
             entityAdapter.removeAll()
             return
         }
@@ -94,18 +94,20 @@ class EntitySearchActivity : AppCompatActivity() {
         }
         val call = service?.getEntityListWrapper(query + "type:$type", getString(R.string.api_key), pageNumber)
         call?.enqueue(object : Callback<EntityListWrapper> {
-            override fun onFailure(call: Call<EntityListWrapper>?, t: Throwable?) {
-                Log.e(TAG, "onFailure: " + t?.message)
+            override fun onFailure(call: Call<EntityListWrapper>, t: Throwable) {
+                Log.e(TAG, "onFailure: " + t.message)
             }
 
-            override fun onResponse(call: Call<EntityListWrapper>?, response: Response<EntityListWrapper>?) {
-                Log.d(TAG, "onResponse isSuccessful: " + response?.isSuccessful)
-                Log.d(TAG, "onResponse code: " + response?.code())
-                Log.d(TAG, "onResponse message: " + response?.message())
-                Log.d(TAG, "onResponse call: " + call?.request())
+            override fun onResponse(
+                call: Call<EntityListWrapper>,
+                response: Response<EntityListWrapper>
+            ) {
+                Log.d(TAG, "onResponse isSuccessful: " + response.isSuccessful)
+                Log.d(TAG, "onResponse code: " + response.code())
+                Log.d(TAG, "onResponse message: " + response.message())
+                Log.d(TAG, "onResponse call: " + call.request())
 
-                if (response == null) { Log.e(TAG, "null response") }
-                if (response!!.body() == null) { Log.e(TAG, "null body") }
+                if (response.body() == null) { Log.e(TAG, "null body") }
 
                 val newEntityList: MutableList<Entity>? = response.body()?.entityList?.toMutableList()
                 if (newEntityList != null) {
@@ -123,7 +125,7 @@ class EntitySearchActivity : AppCompatActivity() {
         entityRecycler.addOnScrollListener(object : androidx.recyclerview.widget.RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: androidx.recyclerview.widget.RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                if (recyclerView.canScrollVertically(1) == false) {
+                if (!recyclerView.canScrollVertically(1)) {
                     Log.d(TAG, "New loadEntities because scroll activity")
                     loadEntities(true)
                 }

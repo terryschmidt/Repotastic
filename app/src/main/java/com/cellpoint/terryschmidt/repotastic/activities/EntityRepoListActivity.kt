@@ -26,10 +26,11 @@ class EntityRepoListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.repo_list_activity)
-        Log.d(TAG, "Repo URL: " + intent.extras.get("repos").toString())
-        repoOwner = intent.extras.get("name").toString()
+        Log.d(TAG, "Repo URL: " + intent.extras?.get("repos").toString())
+        repoOwner = intent.extras?.get("name").toString()
         Log.d(TAG, "Repo Owner: $repoOwner")
-        supportActionBar?.title = intent.extras.get("name").toString() + " (" + intent.extras.get("type") + ")"
+        supportActionBar?.title = intent.extras?.get("name").toString() + " (" + (intent.extras?.get("type")
+            ?: "") + ")"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         repoRecycler = findViewById(R.id.repoRecycler)
         repoRecycler.layoutManager = androidx.recyclerview.widget.LinearLayoutManager(this)
@@ -47,7 +48,7 @@ class EntityRepoListActivity : AppCompatActivity() {
         repoRecycler.addOnScrollListener(object : androidx.recyclerview.widget.RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: androidx.recyclerview.widget.RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
-                if (recyclerView.canScrollVertically(1) == false) {
+                if (!recyclerView.canScrollVertically(1)) {
                     loadRepos(true)
                 }
             }
@@ -63,18 +64,17 @@ class EntityRepoListActivity : AppCompatActivity() {
         val service = RetrofitInstance.getRetrofitInstance()?.create(GetDataService::class.java)
         val call = service?.getReposByName(repoOwner, pageNumber, getString(R.string.api_key))
         call?.enqueue(object : Callback<List<Repo>> {
-            override fun onFailure(call: Call<List<Repo>>?, t: Throwable?) {
-                Log.e(TAG, "onFailure: " + t?.message)
+            override fun onFailure(call: Call<List<Repo>>, t: Throwable) {
+                Log.e(TAG, "onFailure: " + t.message)
             }
 
-            override fun onResponse(call: Call<List<Repo>>?, response: Response<List<Repo>>?) {
-                Log.d(TAG, "onResponse isSuccessful: " + response?.isSuccessful)
-                Log.d(TAG, "onResponse code: " + response?.code())
-                Log.d(TAG, "onResponse message: " + response?.message())
-                Log.d(TAG, "onResponse call: " + call?.request())
+            override fun onResponse(call: Call<List<Repo>>, response: Response<List<Repo>>) {
+                Log.d(TAG, "onResponse isSuccessful: " + response.isSuccessful)
+                Log.d(TAG, "onResponse code: " + response.code())
+                Log.d(TAG, "onResponse message: " + response.message())
+                Log.d(TAG, "onResponse call: " + call.request())
 
-                if (response == null) { Log.e(TAG, "null response") }
-                if (response!!.body() == null) { Log.e(TAG, "null body") }
+                if (response.body() == null) { Log.e(TAG, "null body") }
                 //if (response!!.body()!!. == null) { Log.e(EntitySearchActivity.TAG, "null entityList") }
 
                 val newRepoList: MutableList<Repo>? = response.body()?.toMutableList()
